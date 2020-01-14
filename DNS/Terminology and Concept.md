@@ -81,7 +81,7 @@ Dalam zone file kita bisa punya berbagai macam tipe record.
 
 ### SOA RECORD
 
-`START OF AUTHORITY`, atau `SOA` merupakan record wajib yang harus ada di semua zone file. `SOA` harus menjadi record pertama di dalam file (walapun $ORIGIN atau $TTL bisa saja diletakkan di atas). `SOA` akan terlihat seperti ini :
+`START OF AUTHORITY`, atau `SOA` merupakan record wajib yang harus ada di semua zone file. `SOA` harus menjadi record pertama di dalam file. `SOA` akan terlihat seperti ini :
 
 ```
 gemaadhan.com.  IN SOA ns1.gemaadhan.com. halo.gemaadhan.com. (
@@ -92,32 +92,25 @@ gemaadhan.com.  IN SOA ns1.gemaadhan.com. halo.gemaadhan.com. (
                                             1h      ; negative TTL
 )
 ```
-#### gemaadhan.com.
-ini adalah root dari zone. menentukan bahwa file zone ini untuk domain gemaadhan.com. seringkali hanya ditulis dengan `@`. yang mana hanya sebuah placeholder yang merepresentasikan konten dari variable $ORIGIN yang kita pelajari sebelumnya.
+#### Keterangan
+**gemaadhan.com** : ini adalah root dari zone. menentukan file zone ini untuk domain gemaadhan.com. seringkali hanya ditulis dengan `@`. yang mana hanya sebuah placeholder yang merepresentasikan konten dari variable $ORIGIN yang kita pelajari sebelumnya.
 
-#### IN SOA
-`IN` berarti internet. sedangkan `SOA` adalah indikator bahwa ini adalah record SOA.
+**IN SOA** : `IN` berarti internet. sedangkan `SOA` adalah indikator bahwa ini adalah ```Start of Authority```.
 
-#### ns1.gemaadhan.com.
-menjelaskan primary name server untuk domain `gemaadhan.com.` Name server bisa bertipe primary atau secondary,
+**ns1.gemaadhan.com** :  menerangkan primary name server untuk domain `gemaadhan.com.` Name server bisa bertipe primary atau secondary.
 
-#### halo.gemaadhan.com.
-ini adalah email address admin dari zone ini. `@` yang biasanya ada pada email digantikan dengan `.` pada record di atas. jika email dot di dalamnya. dot akan digantikan dengan backslash contohnya `halo.bro@gemaadhan.com` menjadi `halo\bro.gemaadhan.com`
+**halo.gemaadhan.com** : ini adalah email address admin dari zone ini. `@` yang biasanya ada pada email digantikan dengan `dot`. Jika ada dot di dalam email. dot akan digantikan dengan backslash contohnya `halo.bro@gemaadhan.com` menjadi `halo\bro.gemaadhan.com`.
 
-#### 12083
-ini adalah serial number dari zone file. setiap kali kita edit zone file, kita harus menambahkan angka ini. secondary server akan mengecek apakah serial number primary server untuk zona ini lebih besar daripada serial number zone miliknya. jika iya, secondary server akan merequest file zone baru, jika tidak secondary name server tetap menggunakan file yang original.
+**12083** : ini adalah serial number dari zone file. setiap kali kita edit zone file, kita harus menambahkan angka ini. secondary server akan mengecek apakah serial number primary server untuk zona ini lebih besar daripada serial number zone miliknya. jika iya, secondary server akan merequest file zone baru, jika tidak secondary name server tetap menggunakan file original miliknya.
 
-#### 3h
-ini adalah refresh interval untuk sebuah zone. adalah jumlah waktu yang secondary server akan tunggu sebelum melihat perubahan pada primay zone file.
+**3h** : ini adalah refresh interval untuk zone ini. ini adalah jumlah waktu yang secondary server akan tunggu sebelum polling primary zone untuk perubahan pada file.
 
 
-#### 30m
-ini adalah retry interval untuk sebuah zone. jika secondary server ga bisa terubung ke primary ketika refresh period tiba, dia akan menunggu dalam rentan waktu ini dan retry untuk poll the primary.
+**30m** : ini adalah retry interval untuk zone ini. jika secondary server tidak bisa terhubung ke primary ketika refresh period habis, dia akan menunggu dalam rentan waktu ini dan retry untuk poll ke primary.
 
-#### 3w
-ini adalah expire period. jika secondary name server tidak dapat mengcontact primary server dalam rentan waktu ini, dia tidak akan lagi mrespon request sebagai authoritative source for this zone.
+**3w** : ini adalah expire period. jika secondary name server tidak dapat menghubungi primary server dalam rentan waktu ini, dia tidak akan lagi merespon request sebagai authoritative source for this zone.
 
-#### 1h
+**1h**
 ini adalah jumlah waktu dimana name server akan men cache sebuah name error jika dia tidak bisa menemukan requested name di dalam file ini.
 
 ### A dan AAAA
