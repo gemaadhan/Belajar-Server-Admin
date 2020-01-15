@@ -113,10 +113,10 @@ gemaadhan.com.  IN SOA ns1.gemaadhan.com. halo.gemaadhan.com. (
 **1h**
 ini adalah jumlah waktu dimana name server akan men cache sebuah name error jika dia tidak bisa menemukan requested name di dalam file ini.
 
-### A dan AAAA
+### Record A dan AAAA
 kedua record ini memetakan host ke ip address. A untuk ipv4 dan AAAA untuk ipv6.
 
-A DAN AAAA record akan terlihat seperti ini :
+format A DAN AAAA record akan terlihat seperti ini :
 
 ```
 host     IN      A       IPv4_address
@@ -134,12 +134,12 @@ kita tidak harus memasukan full name. kita hanya perlu memasukkan host tanpa FQD
 ```
 ns1.gemaadhan.com.     IN  A       111.222.111.222
 ```
-kita juga biasanya menggunakan web server record nya akan terlihat seperti ini
+kita juga biasanya menggunakan web server, record nya akan terlihat seperti ini
 ```
 www     IN  A       222.222.222.222
 ```
 
-kita juga biasanya memberikan record kemana base domain kita akan ke record.
+kita juga biasanya memberi tahu kemana base domain kita akan ke resolve.
 
 ```
 gemaadhan.com.     IN  A       222.222.222.222
@@ -151,7 +151,7 @@ atau untuk merefer ke base domain cukup gunakan  `@`
 @       IN  A       222.222.222.222
 ```
 
-kita juga bisa meresolve apapun yang tidak teresolve secara explicit dengan menggunakan wildcard
+kita juga bisa meresolve apapun yang tidak didefine secara explicit dengan menggunakan wildcard
 
 ```
 *       IN  A       222.222.222.222
@@ -161,7 +161,7 @@ semua contoh di atas work juga untuk record AAAA.
 
 ### CNAME Records
 
-CNAME record digunakan sebagai alias untuk A dan AAAA records.
+CNAME record digunakan sebagai alias untuk A atau AAAA records.
 
 contoh kita punya A record untuk host server1. kemudian kita bisa menggunakan `www` sebagai alias untuk server1.
 
