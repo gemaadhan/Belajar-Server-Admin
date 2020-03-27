@@ -1,4 +1,4 @@
-#Basic Configuration
+# Basic Configuration
 
 ## Get DHCP
 ```
